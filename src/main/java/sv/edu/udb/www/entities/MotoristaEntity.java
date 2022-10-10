@@ -1,12 +1,18 @@
 package sv.edu.udb.www.entities;
 
+
 import jakarta.persistence.*;
 
 import java.util.Date;
 
+
 @Entity
-@Table(name = "motorista", schema = "getit", catalog = "")
+@Table(name = "motorista", schema = "getit")
+@NamedQueries({
+        @NamedQuery(name = "Motorista.findAllComidas", query = "SELECT OBJECT(com) FROM ComidasEntity com")
+})
 public class MotoristaEntity {
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "Id_motorista", nullable = false)
