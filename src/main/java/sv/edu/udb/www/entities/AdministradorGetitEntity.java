@@ -2,6 +2,8 @@ package sv.edu.udb.www.entities;
 
 import jakarta.persistence.*;
 
+import java.util.Collection;
+
 @Entity
 @Table(name = "administrador_getit", schema = "getit")
 public class AdministradorGetitEntity {
@@ -18,6 +20,10 @@ public class AdministradorGetitEntity {
     @Basic
     @Column(name = "ganancias_getit", nullable = false, precision = 0)
     private double gananciasGetit;
+    @OneToMany(mappedBy = "administradorGetitByIdAdministrador")
+    private Collection<PedidosEntity> pedidosByIdAdministradorGetit;
+    @OneToMany(mappedBy = "administradorGetitByAdminGetit")
+    private Collection<UsuariosEntity> usuariosByIdAdministradorGetit;
 
     public int getIdAdministradorGetit() {
         return idAdministradorGetit;
@@ -76,5 +82,21 @@ public class AdministradorGetitEntity {
         temp = Double.doubleToLongBits(gananciasGetit);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;
+    }
+
+    public Collection<PedidosEntity> getPedidosByIdAdministradorGetit() {
+        return pedidosByIdAdministradorGetit;
+    }
+
+    public void setPedidosByIdAdministradorGetit(Collection<PedidosEntity> pedidosByIdAdministradorGetit) {
+        this.pedidosByIdAdministradorGetit = pedidosByIdAdministradorGetit;
+    }
+
+    public Collection<UsuariosEntity> getUsuariosByIdAdministradorGetit() {
+        return usuariosByIdAdministradorGetit;
+    }
+
+    public void setUsuariosByIdAdministradorGetit(Collection<UsuariosEntity> usuariosByIdAdministradorGetit) {
+        this.usuariosByIdAdministradorGetit = usuariosByIdAdministradorGetit;
     }
 }

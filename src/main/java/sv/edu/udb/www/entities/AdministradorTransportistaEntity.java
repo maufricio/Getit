@@ -2,8 +2,10 @@ package sv.edu.udb.www.entities;
 
 import jakarta.persistence.*;
 
+import java.util.Collection;
+
 @Entity
-@Table(name = "administrador_transportista", schema = "getit", catalog = "")
+@Table(name = "administrador_transportista", schema = "getit")
 public class AdministradorTransportistaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -18,6 +20,12 @@ public class AdministradorTransportistaEntity {
     @Basic
     @Column(name = "ganancias_transporte", nullable = false, precision = 0)
     private double gananciasTransporte;
+    @OneToMany(mappedBy = "administradorTransportistaByIdAdministradorTransportista")
+    private Collection<MotoristaEntity> motoristasByIdAdministradorTransportista;
+    @OneToMany(mappedBy = "administradorTransportistaByIdAdministradorTransportista")
+    private Collection<UnidadesTransporteEntity> unidadesTransportesByIdAdministradorTransportista;
+    @OneToMany(mappedBy = "administradorTransportistaByAdminTransporte")
+    private Collection<UsuariosEntity> usuariosByIdAdministradorTransportista;
 
     public int getIdAdministradorTransportista() {
         return idAdministradorTransportista;
@@ -77,5 +85,29 @@ public class AdministradorTransportistaEntity {
         temp = Double.doubleToLongBits(gananciasTransporte);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;
+    }
+
+    public Collection<MotoristaEntity> getMotoristasByIdAdministradorTransportista() {
+        return motoristasByIdAdministradorTransportista;
+    }
+
+    public void setMotoristasByIdAdministradorTransportista(Collection<MotoristaEntity> motoristasByIdAdministradorTransportista) {
+        this.motoristasByIdAdministradorTransportista = motoristasByIdAdministradorTransportista;
+    }
+
+    public Collection<UnidadesTransporteEntity> getUnidadesTransportesByIdAdministradorTransportista() {
+        return unidadesTransportesByIdAdministradorTransportista;
+    }
+
+    public void setUnidadesTransportesByIdAdministradorTransportista(Collection<UnidadesTransporteEntity> unidadesTransportesByIdAdministradorTransportista) {
+        this.unidadesTransportesByIdAdministradorTransportista = unidadesTransportesByIdAdministradorTransportista;
+    }
+
+    public Collection<UsuariosEntity> getUsuariosByIdAdministradorTransportista() {
+        return usuariosByIdAdministradorTransportista;
+    }
+
+    public void setUsuariosByIdAdministradorTransportista(Collection<UsuariosEntity> usuariosByIdAdministradorTransportista) {
+        this.usuariosByIdAdministradorTransportista = usuariosByIdAdministradorTransportista;
     }
 }

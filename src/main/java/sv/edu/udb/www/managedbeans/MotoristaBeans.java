@@ -2,8 +2,8 @@ package sv.edu.udb.www.managedbeans;
 
 import jakarta.faces.bean.ManagedBean;
 import jakarta.faces.bean.RequestScoped;
-import sv.edu.udb.www.entities.ComidasEntity;
 import sv.edu.udb.www.entities.MotoristaEntity;
+import sv.edu.udb.www.entities.PedidosEntity;
 import sv.edu.udb.www.models.MotoristaModels;
 
 import java.util.List;
@@ -15,12 +15,12 @@ public class MotoristaBeans {
     private MotoristaModels motoristaModels;
 
     public MotoristaBeans() {
+        this.motoristaEntity = new MotoristaEntity();
         this.motoristaModels = new MotoristaModels();
     }
 
-    //Retornar toda la lista de comidas
-    public List<ComidasEntity> getAllComidas() throws Exception {
-        return this.motoristaModels.listarComidas();
+    public List<PedidosEntity> getListaPedidosByMotorista() {
+        return this.motoristaModels.getListaPedidosByIdMotorista(1);
     }
 
     public MotoristaEntity getMotoristaEntity() {

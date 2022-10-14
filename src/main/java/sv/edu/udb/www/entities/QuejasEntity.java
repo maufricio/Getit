@@ -3,21 +3,21 @@ package sv.edu.udb.www.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "quejas", schema = "getit", catalog = "")
+@Table(name = "quejas", schema = "getit")
 public class QuejasEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "Id_queja", nullable = false)
     private int idQueja;
     @Basic
-    @Column(name = "Id_idUsuario", nullable = false)
-    private int idIdUsuario;
-    @Basic
     @Column(name = "descripcionQueja", nullable = false, length = -1)
     private String descripcionQueja;
     @Basic
     @Column(name = "respuestaQueja", nullable = false, length = -1)
     private String respuestaQueja;
+    @ManyToOne
+    @JoinColumn(name = "Id_idUsuario", referencedColumnName = "Id_cliente", nullable = false)
+    private ClientesEntity clientesByIdIdUsuario;
 
     public int getIdQueja() {
         return idQueja;
@@ -25,14 +25,6 @@ public class QuejasEntity {
 
     public void setIdQueja(int idQueja) {
         this.idQueja = idQueja;
-    }
-
-    public int getIdIdUsuario() {
-        return idIdUsuario;
-    }
-
-    public void setIdIdUsuario(int idIdUsuario) {
-        this.idIdUsuario = idIdUsuario;
     }
 
     public String getDescripcionQueja() {
@@ -59,7 +51,6 @@ public class QuejasEntity {
         QuejasEntity that = (QuejasEntity) o;
 
         if (idQueja != that.idQueja) return false;
-        if (idIdUsuario != that.idIdUsuario) return false;
         if (descripcionQueja != null ? !descripcionQueja.equals(that.descripcionQueja) : that.descripcionQueja != null)
             return false;
         if (respuestaQueja != null ? !respuestaQueja.equals(that.respuestaQueja) : that.respuestaQueja != null)
@@ -71,9 +62,16 @@ public class QuejasEntity {
     @Override
     public int hashCode() {
         int result = idQueja;
-        result = 31 * result + idIdUsuario;
         result = 31 * result + (descripcionQueja != null ? descripcionQueja.hashCode() : 0);
         result = 31 * result + (respuestaQueja != null ? respuestaQueja.hashCode() : 0);
         return result;
+    }
+
+    public ClientesEntity getClientesByIdIdUsuario() {
+        return clientesByIdIdUsuario;
+    }
+
+    public void setClientesByIdIdUsuario(ClientesEntity clientesByIdIdUsuario) {
+        this.clientesByIdIdUsuario = clientesByIdIdUsuario;
     }
 }

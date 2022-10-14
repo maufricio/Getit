@@ -2,8 +2,8 @@ package sv.edu.udb.www.entities;
 
 import jakarta.persistence.*;
 
-import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Collection;
 
 @Entity
 @Table(name = "comidas", schema = "getit")
@@ -27,6 +27,8 @@ public class ComidasEntity {
     @Basic
     @Column(name = "stock_comida", nullable = false)
     private int stockComida;
+    @OneToMany(mappedBy = "comidasByIdComida")
+    private Collection<PagosEntity> pagosByIdComida;
 
     public int getIdComida() {
         return idComida;
@@ -106,5 +108,13 @@ public class ComidasEntity {
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + stockComida;
         return result;
+    }
+
+    public Collection<PagosEntity> getPagosByIdComida() {
+        return pagosByIdComida;
+    }
+
+    public void setPagosByIdComida(Collection<PagosEntity> pagosByIdComida) {
+        this.pagosByIdComida = pagosByIdComida;
     }
 }

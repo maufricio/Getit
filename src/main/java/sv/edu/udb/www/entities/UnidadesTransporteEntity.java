@@ -2,7 +2,7 @@ package sv.edu.udb.www.entities;
 
 import jakarta.persistence.*;
 
-import java.io.Serializable;
+import java.util.Collection;
 
 @Entity
 @Table(name = "unidades_transporte", schema = "getit")
@@ -20,12 +20,14 @@ public class UnidadesTransporteEntity {
     @Basic
     @Column(name = "pesoVehiculo", nullable = false)
     private String pesoVehiculo;
-    @Basic
-    @Column(name = "Id_administrador_transportista", nullable = false)
-    private int idAdministradorTransportista;
-    @Basic
-    @Column(name = "estado_unidad", nullable = false)
-    private int estadoUnidad;
+    @OneToMany(mappedBy = "unidadesTransporteByIdUnidadTransporte")
+    private Collection<PedidosEntity> pedidosByIdUnidadTransporte;
+    @ManyToOne
+    @JoinColumn(name = "Id_administrador_transportista", referencedColumnName = "Id_administrador_transportista", nullable = false)
+    private AdministradorTransportistaEntity administradorTransportistaByIdAdministradorTransportista;
+    @ManyToOne
+    @JoinColumn(name = "estado_unidad", referencedColumnName = "Id_estado", nullable = false)
+    private EstadosGeneralesEntity estadosGeneralesByEstadoUnidad;
 
     public int getIdUnidadTransporte() {
         return idUnidadTransporte;
@@ -59,22 +61,6 @@ public class UnidadesTransporteEntity {
         this.pesoVehiculo = pesoVehiculo;
     }
 
-    public int getIdAdministradorTransportista() {
-        return idAdministradorTransportista;
-    }
-
-    public void setIdAdministradorTransportista(int idAdministradorTransportista) {
-        this.idAdministradorTransportista = idAdministradorTransportista;
-    }
-
-    public int getEstadoUnidad() {
-        return estadoUnidad;
-    }
-
-    public void setEstadoUnidad(int estadoUnidad) {
-        this.estadoUnidad = estadoUnidad;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -83,8 +69,6 @@ public class UnidadesTransporteEntity {
         UnidadesTransporteEntity that = (UnidadesTransporteEntity) o;
 
         if (idUnidadTransporte != that.idUnidadTransporte) return false;
-        if (idAdministradorTransportista != that.idAdministradorTransportista) return false;
-        if (estadoUnidad != that.estadoUnidad) return false;
         if (placa != null ? !placa.equals(that.placa) : that.placa != null) return false;
         if (tipoVehiculo != null ? !tipoVehiculo.equals(that.tipoVehiculo) : that.tipoVehiculo != null) return false;
         if (pesoVehiculo != null ? !pesoVehiculo.equals(that.pesoVehiculo) : that.pesoVehiculo != null) return false;
@@ -98,8 +82,30 @@ public class UnidadesTransporteEntity {
         result = 31 * result + (placa != null ? placa.hashCode() : 0);
         result = 31 * result + (tipoVehiculo != null ? tipoVehiculo.hashCode() : 0);
         result = 31 * result + (pesoVehiculo != null ? pesoVehiculo.hashCode() : 0);
-        result = 31 * result + idAdministradorTransportista;
-        result = 31 * result + estadoUnidad;
         return result;
+    }
+
+    public Collection<PedidosEntity> getPedidosByIdUnidadTransporte() {
+        return pedidosByIdUnidadTransporte;
+    }
+
+    public void setPedidosByIdUnidadTransporte(Collection<PedidosEntity> pedidosByIdUnidadTransporte) {
+        this.pedidosByIdUnidadTransporte = pedidosByIdUnidadTransporte;
+    }
+
+    public AdministradorTransportistaEntity getAdministradorTransportistaByIdAdministradorTransportista() {
+        return administradorTransportistaByIdAdministradorTransportista;
+    }
+
+    public void setAdministradorTransportistaByIdAdministradorTransportista(AdministradorTransportistaEntity administradorTransportistaByIdAdministradorTransportista) {
+        this.administradorTransportistaByIdAdministradorTransportista = administradorTransportistaByIdAdministradorTransportista;
+    }
+
+    public EstadosGeneralesEntity getEstadosGeneralesByEstadoUnidad() {
+        return estadosGeneralesByEstadoUnidad;
+    }
+
+    public void setEstadosGeneralesByEstadoUnidad(EstadosGeneralesEntity estadosGeneralesByEstadoUnidad) {
+        this.estadosGeneralesByEstadoUnidad = estadosGeneralesByEstadoUnidad;
     }
 }

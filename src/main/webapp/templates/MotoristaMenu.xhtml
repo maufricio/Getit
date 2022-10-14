@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+    <title>Perfil de Motorista</title>
+</h:head>
+
+<h:body>
+    <div class="card">
+        <h:form>
+            <p:breadCrumb>
+                <p:menuitem value="Electronics"/>
+                <p:menuitem value="Computer"/>
+                <p:menuitem value="Notebook"/>
+                <p:menuitem value="Accessories"/>
+                <p:menuitem value="Backpacks"/>
+                <p:menuitem value="Item"/>
+            </p:breadCrumb>
+        </h:form>
+    </div>
+    <h:form>
+        <div class="card">
+            <h2 style="text-decoration-color: aquamarine">Pedidos al motorista</h2>
+            <p:dataTable var="pedido" value="#{motoristaBeans.listaPedidosByMotorista}" allowUnsorting="true" sortMode="single">
+                <p:column sortBy="#{pedido.idPedido}" headerText="Codigo Pedido">
+                    <h:outputText value="##{pedido.idPedido}"/>
+                </p:column>
+                <p:column sortBy="#{pedido.pagosByIdPago.tipoPagosByTipoPago.tipoPago}" headerText="Tipo de pago realizado">
+
+                        <h:outputText value="#{pedido.pagosByIdPago.tipoPagosByTipoPago.tipoPago}" style="background: aqua; padding: 5px 10px; border-radius: 10px;"/>
+
+                </p:column>
+                <p:column sortBy="#{pedido.fechaEfectuacion}" headerText="Fecha Efectuacion" sortOrder="asc">
+                    <h:outputText value="#{pedido.fechaEfectuacion}">
+                        <f:convertDateTime pattern="dd-MM-yyyy" />
+                    </h:outputText>
+                </p:column>
+                <p:column sortBy="#{pedido.direccionDomicilio}" headerText="Dirección a dirigirse">
+                    <h:outputText value="#{pedido.direccionDomicilio}"/>
+                </p:column>
+                <p:column sortBy="#{pedido.pagosByIdPago.montoPago}" headerText="Costo de Pago">
+                    <h:outputText value="$ #{pedido.pagosByIdPago.montoPago}"/>
+                </p:column>
+                <p:column sortBy="#{pedido.pagosByIdPago.comidasByIdComida.nombreComida}" headerText="Comida Ordenada">
+                    <h:outputText value="#{pedido.pagosByIdPago.comidasByIdComida.nombreComida}"/>
+                </p:column>
+                <p:column sortBy="#{pedido.pagosByIdPago.clientesByIdCliente.primerNombre}" headerText="Nombre de cliente">
+                    <h:outputText value="#{pedido.pagosByIdPago.clientesByIdCliente.primerNombre} #{pedido.pagosByIdPago.clientesByIdCliente.primerApellido}"/>
+                </p:column>
+            </p:dataTable>
+        </div>
+    </h:form>
+</h:body>
+</html>

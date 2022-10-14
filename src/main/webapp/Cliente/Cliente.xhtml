@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:b="http://bootsfaces.net/ui"
+        xmlns:f="http://java.sun.com/jsf/core"
+        template="${pageContext.request.contextPath}/templates/plantillaboot.xhtml">
+    <ui:define name="contenido">
+        <b:dataTable value="#{pedidosBean.pedidos}" var="historial"
+                     id="entradasPool"
+                     styleClass="table table-striped table-bordered">
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Pedido"/>
+                </f:facet>
+                <h:outputText value="#{historial.idPedido}"/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Pago"/>
+                </f:facet>
+                <h:outputText value="#{historial.idPago}"/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Motorista"/>
+                </f:facet>
+                <h:outputText value="#{historial.idMotorista}"/>
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Emp_Transporte"/>
+
+                </f:facet>
+                <h:outputText value="#{historial.idUnidadTransporte}"/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="hearder">
+                    <h:outputText value="Direccion de Envio"/>
+                </f:facet>
+                <h:outputText value="#{historial.direccionDomicilio}"/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Tiempo Tardio"/>
+                </f:facet>
+                <h:outputText value="#{historial.tiempoTardado}"/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Estado Pedido"/>
+                </f:facet>
+                <h:outputText value="#{historial.estadoPedido}"/>
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">
+                    <h:outputText value="Fecha Entrega"/>
+
+                </f:facet>
+                <h:outputFormat value="#{historial.fechaEfectuacion}">
+                    <f:convertDateTime type="date" pattern="dd-MM-yyyy"/>
+                </h:outputFormat>
+            </h:column>
+        </b:dataTable>
+        <b:messages/>
+    </ui:define>
+</ui:composition>

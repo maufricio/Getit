@@ -2,10 +2,11 @@ package sv.edu.udb.www.entities;
 
 import jakarta.persistence.*;
 
+import java.util.Collection;
 import java.util.Date;
 
 @Entity
-@Table(name = "clientes", schema = "getit", catalog = "")
+@Table(name = "clientes", schema = "getit")
 public class ClientesEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -26,6 +27,12 @@ public class ClientesEntity {
     @Basic
     @Column(name = "domicilio", nullable = false, length = 100)
     private String domicilio;
+    @OneToMany(mappedBy = "clientesByIdCliente")
+    private Collection<PagosEntity> pagosByIdCliente;
+    @OneToMany(mappedBy = "clientesByIdIdUsuario")
+    private Collection<QuejasEntity> quejasByIdCliente;
+    @OneToMany(mappedBy = "clientesByUsuario")
+    private Collection<UsuariosEntity> usuariosByIdCliente;
 
     public int getIdCliente() {
         return idCliente;
@@ -102,5 +109,29 @@ public class ClientesEntity {
         result = 31 * result + (fechaNac != null ? fechaNac.hashCode() : 0);
         result = 31 * result + (domicilio != null ? domicilio.hashCode() : 0);
         return result;
+    }
+
+    public Collection<PagosEntity> getPagosByIdCliente() {
+        return pagosByIdCliente;
+    }
+
+    public void setPagosByIdCliente(Collection<PagosEntity> pagosByIdCliente) {
+        this.pagosByIdCliente = pagosByIdCliente;
+    }
+
+    public Collection<QuejasEntity> getQuejasByIdCliente() {
+        return quejasByIdCliente;
+    }
+
+    public void setQuejasByIdCliente(Collection<QuejasEntity> quejasByIdCliente) {
+        this.quejasByIdCliente = quejasByIdCliente;
+    }
+
+    public Collection<UsuariosEntity> getUsuariosByIdCliente() {
+        return usuariosByIdCliente;
+    }
+
+    public void setUsuariosByIdCliente(Collection<UsuariosEntity> usuariosByIdCliente) {
+        this.usuariosByIdCliente = usuariosByIdCliente;
     }
 }
