@@ -10,6 +10,7 @@ public class JpaUtil {
         emFactory = Persistence.createEntityManagerFactory("default");
     }
     public static EntityManager getEntityManager() {
+
         return emFactory.createEntityManager();
     }
 }
