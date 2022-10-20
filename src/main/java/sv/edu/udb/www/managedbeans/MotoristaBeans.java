@@ -1,7 +1,9 @@
 package sv.edu.udb.www.managedbeans;
 
+import jakarta.faces.application.FacesMessage;
 import jakarta.faces.bean.ManagedBean;
 import jakarta.faces.bean.RequestScoped;
+import jakarta.faces.context.FacesContext;
 import sv.edu.udb.www.entities.MotoristaEntity;
 import sv.edu.udb.www.entities.PedidosEntity;
 import sv.edu.udb.www.models.MotoristaModels;
@@ -23,6 +25,23 @@ public class MotoristaBeans {
     public List<PedidosEntity> getListaPedidosByMotorista() {
         return this.motoristaModels.getListaPedidosByIdMotorista(this.motoristaEntity.getIdMotorista());
     }
+    /*
+        public String prueba(MotoristaEntity motoristaEntity){
+            motoristaModels.insertarMotorista(motoristaEntity);
+            return "";
+        }
+    */
+
+
+
+
+
+
+    public String getAdministradorTransportista() { return this.motoristaModels.getJefeTransportistaOfMotorista(this.motoristaEntity.getIdMotorista()); }
+
+    public String getEstado() {
+        return motoristaModels.getEstadoMotorista(this.motoristaEntity.getIdMotorista());
+    }
 
     public MotoristaEntity getMotoristaEntity() {
         return motoristaEntity;
@@ -39,4 +58,6 @@ public class MotoristaBeans {
     public void setMotoristaModels(MotoristaModels motoristaModels) {
         this.motoristaModels = motoristaModels;
     }
+
+
 }

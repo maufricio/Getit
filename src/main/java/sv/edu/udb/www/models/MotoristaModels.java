@@ -3,6 +3,8 @@ package sv.edu.udb.www.models;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Query;
+import sv.edu.udb.www.entities.AdministradorTransportistaEntity;
+import sv.edu.udb.www.entities.EstadosGeneralesEntity;
 import sv.edu.udb.www.entities.MotoristaEntity;
 import sv.edu.udb.www.entities.PedidosEntity;
 import sv.edu.udb.www.utils.JpaUtil;
@@ -93,7 +95,7 @@ public class MotoristaModels {
             em.close();
         }
     }
-
+    //usada en parte Alex de Administrador Transportista
     public int eliminarMotorista(int idMotorista) {
         EntityManager em = JpaUtil.getEntityManager();
         EntityTransaction tran = em.getTransaction();
