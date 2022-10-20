@@ -20,6 +20,7 @@ public class AdministradorGetitEntity {
     @Basic
     @Column(name = "ganancias_getit", nullable = false, precision = 0)
     private double gananciasGetit;
+
     @OneToMany(mappedBy = "administradorGetitByIdAdministrador")
     private Collection<PedidosEntity> pedidosByIdAdministradorGetit;
     @OneToMany(mappedBy = "administradorGetitByAdminGetit")

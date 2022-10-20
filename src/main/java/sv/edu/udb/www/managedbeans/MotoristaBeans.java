@@ -10,17 +10,18 @@ import java.util.List;
 
 @ManagedBean
 @RequestScoped
+//Mauricio Perez
 public class MotoristaBeans {
     private MotoristaEntity motoristaEntity;
     private MotoristaModels motoristaModels;
 
     public MotoristaBeans() {
-        this.motoristaEntity = new MotoristaEntity();
         this.motoristaModels = new MotoristaModels();
+        this.motoristaEntity = this.motoristaModels.getMotoristaById(5);
     }
 
     public List<PedidosEntity> getListaPedidosByMotorista() {
-        return this.motoristaModels.getListaPedidosByIdMotorista(1);
+        return this.motoristaModels.getListaPedidosByIdMotorista(this.motoristaEntity.getIdMotorista());
     }
 
     public MotoristaEntity getMotoristaEntity() {

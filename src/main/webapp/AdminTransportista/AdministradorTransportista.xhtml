@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: HP
+  Date: 18/10/2022
+  Time: 21:39
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+    <title>Title</title>
+</h:head>
+<style type="">
+    .ui-grid-col-12 {
+        background-color: #ededed;
+        text-align: center;
+        border: 1px solid #fafafa;
+        border-radius: 10px;
+        box-shadow: 0 25px 25px black;
+        border: none;
+        padding: 20px;
+
+    }
+    .encabezado{
+        padding: 2px;
+        text-align: center;
+        background-color: #595858;
+        border-radius: 10px;
+        margin-bottom: 5px;
+    }
+
+</style>
+<h:body style="background-color: #e0eef1 ">
+
+    <h:form>
+
+
+        <div class="ui-grid" style=" margin: 0 auto; width: 30%; text-align: center">
+            <ui:repeat value="#{administradorTransportistaBeans.administradorTransportistasid}" var="list">
+                <div class="ui-grid-col-12">
+                    <div class="encabezado"><h1>#{list.nombreEmpresa}</h1></div>
+                    <h2 style="text-align: center"><b>Ganancias: #{list.gananciasTransporte}</b></h2 >
+                </div>
+            </ui:repeat>
+        </div>
+    </h:form>
+    <br/>
+    <h1 style="text-align: center; font-family: Impact"><b>Unidades de transporte</b></h1>
+    <h:form>
+        <p:dataTable style="width: 80%; margin: 0 auto;box-shadow: 0 25px 25px black; border-radius: 10px"  var="lista" value="#{unidadesTransporteBeans.unidadesTransportesid}" showGridlines="true">
+            <p:column headerText="Id Unidad">
+                <h:outputText value="#{lista.idUnidadTransporte}" />
+            </p:column>
+
+            <p:column headerText="Placa">
+                <h:outputText value="#{lista.placa}" />
+            </p:column>
+
+            <p:column headerText="Tipo de Vehiculo">
+                <h:outputText value="#{lista.tipoVehiculo}" />
+            </p:column>
+
+            <p:column headerText="Peso del Vehiculo">
+                <h:outputText value="#{lista.pesoVehiculo}" />
+            </p:column>
+            <p:column headerText=" Administrador Transportista">
+                <h:outputText value="#{lista.administradorTransportistaByIdAdministradorTransportista.nombreEmpresa}" />
+            </p:column>
+            <p:column  style="text-align: center" headerText="Estado de la Unidad">
+                <h:outputText value="#{lista.estadosGeneralesByEstadoUnidad.estado}" />
+            </p:column>
+
+        </p:dataTable>
+    </h:form>
+
+
+    <br/><br/>
+    <h1 style="text-align: center; font-family: Impact">Motoristas por Empresa</h1>
+    <br/>
+    <h:form>
+        <p:dataTable style="width: 80%; margin: 0 auto;box-shadow: 0 25px 25px black; border-radius: 10px"  var="list2" value="#{adminMotoristaBeans.motoritasid}">
+            <p:column headerText="Administrador transportista">
+                <h:outputText value="#{list2.administradorTransportistaByIdAdministradorTransportista.nombreEmpresa}" />
+            </p:column>
+
+
+
+            <p:column headerText="Id motorista">
+                <h:outputText value="#{list2.idMotorista}" />
+            </p:column>
+
+
+            <p:column  headerText="Email">
+                <h:outputText value="#{list2.email}" />
+            </p:column>
+
+            <p:column headerText="Estado">
+                <h:outputText value="#{list2.estadosGeneralesByEstadoMotorista.estado}" />
+            </p:column>
+
+            <p:column headerText="DUI">
+                <h:outputText value="#{list2.dui}" />
+            </p:column>
+
+            <p:column headerText="Telefono">
+                <h:outputText value="#{list2.telefono}" />
+            </p:column>
+
+            <p:column headerText="Fecha de Nacimiento">
+                <h:outputText value="#{list2.fechaNac}" />
+            </p:column>
+
+        </p:dataTable>
+    </h:form>
+    <br/><br/><br/>
+</h:body>
+
+
+</html>

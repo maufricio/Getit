@@ -1,24 +1,22 @@
 package sv.edu.udb.www.models;
 
 
-
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
-import sv.edu.udb.www.entities.PedidosEntity;
+import sv.edu.udb.www.entities.PagosEntity;
+import sv.edu.udb.www.entities.PagosEntity;
 import sv.edu.udb.www.utils.JpaUtil;
 
 import java.util.List;
 
-// Marlon Realegueño
-public class ClientesModels {
-
-    public List<PedidosEntity>listaPedidos(){
+public class PagosModels {
+    public List<PagosEntity>listaPagos(){
 
         EntityManager em = JpaUtil.getEntityManager();
         try{
-            Query consulta = em.createQuery("select e from PedidosEntity e");
+            Query consulta = em.createQuery("select e from PagosEntity e");
 
-            List<PedidosEntity> lista = consulta.getResultList();
+            java.util.List<sv.edu.udb.www.entities.PagosEntity> lista = consulta.getResultList();
             em.close();
             return lista;
         }catch (Exception e){
@@ -26,10 +24,10 @@ public class ClientesModels {
             return null;
         }
     }
-    public PedidosEntity obtenerPedido(int id){
+    public PagosEntity obtenerPagos(int id){
         EntityManager em = JpaUtil.getEntityManager();
         try{
-            PedidosEntity obtengo = em.find(PedidosEntity.class, id);
+            PagosEntity obtengo = em.find(PagosEntity.class, id);
             em.close();
             return obtengo;
         }catch (Exception e){
@@ -37,5 +35,5 @@ public class ClientesModels {
             return null;
         }
     }
-
 }
+

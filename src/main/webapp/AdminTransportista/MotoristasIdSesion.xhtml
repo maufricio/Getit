@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: HP
+  Date: 18/10/2022
+  Time: 22:39
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+    <title>Title</title>
+</h:head>
+
+<h:body style="background-color: #e0eef1 ">
+    <!--  formulario-->
+    <div style="border-radius: 10px; padding: 20px; box-shadow: 0 25px 25px black; background-color: white; width: 50%; margin: 0 auto">
+        <h:form>
+            <h2 style="text-align: center; font-family: Impact"><b>Motoristas</b></h2>
+            <div class="ui-fluid">
+
+                <div class="field grid" style="margin-top: 10px">
+                    <p:outputLabel  styleClass="col-12 md:col-2" value="ID"/>
+                    <div class="col-12 md:col-10">
+                        <p:inputText value="#{adminMotoristaBeans.motoristaEntity.idMotorista}" required="false" requiredMessage="Id requerido" readonly="true"/>
+                    </div>
+                </div>
+
+                <div class="field grid" style="margin-top: 10px">
+                    <p:outputLabel  styleClass="col-12 md:col-2" value="DUI"/>
+                    <div class="col-12 md:col-10">
+                        <p:inputText value="#{adminMotoristaBeans.motoristaEntity.dui}" required="true" requiredMessage="DUI requerido"/>
+                    </div>
+                </div>
+
+                <div class="field grid" style="margin-top: 10px">
+                    <p:outputLabel  styleClass="col-12 md:col-2" value="Telefono"/>
+                    <div class="col-12 md:col-10">
+                        <p:inputText value="#{adminMotoristaBeans.motoristaEntity.telefono}" required="true" requiredMessage="Telefono requerida"/>
+                    </div>
+                </div>
+
+                <div class="field grid" style="margin-top: 10px">
+                    <p:outputLabel  styleClass="col-12 md:col-2" value="Email"/>
+                    <div class="col-12 md:col-10">
+                        <p:inputText value="#{adminMotoristaBeans.motoristaEntity.email}" required="true" requiredMessage="Email requerido"/>
+                    </div>
+                </div>
+
+                <div class="field grid" style="margin-top: 10px">
+                    <p:outputLabel  styleClass="col-12 md:col-2" value="Fecha de nacimiento"/>
+                    <div class="col-12 md:col-10">
+                        <p:datePicker id="time" value="#{adminMotoristaBeans.motoristaEntity.fechaNac}" requiredMessage="Fecha requerida"  showTime="true" required="true" />
+                    </div>
+                </div>
+
+                <div class="field grid" style="margin-top: 10px">
+                    <p:outputLabel  styleClass="col-12 md:col-2" value="Id Empresa Transportista"/>
+                    <div class="col-12 md:col-10">
+                        <p:selectOneMenu value="#{adminMotoristaBeans.idAdminTransportista}">
+                            <f:selectItems value="#{administradorTransportistaBeans.administradorTransportistasid}" var="listaadmin"
+                                           itemLabel="#{listaadmin.nombreEmpresa}" itemValue="#{listaadmin.idAdministradorTransportista}"/>
+                        </p:selectOneMenu>
+                    </div>
+                </div>
+
+                <div class="field grid" style="margin-top: 10px">
+                    <p:outputLabel  styleClass="col-12 md:col-2" value="Peso del vehiculo"/>
+                    <div class="col-12 md:col-10">
+                        <p:selectOneMenu value="#{adminMotoristaBeans.idEstadoMotorista}">
+                            <f:selectItem itemValue="1" itemLabel="Disponible"></f:selectItem>
+                            <f:selectItem itemValue="2" itemLabel="Ocupado"></f:selectItem>
+                        </p:selectOneMenu>
+                    </div>
+                </div>
+
+
+                <h:messages />
+
+                <p:panelGrid columns="4" layout="grid" styleClass="showcase-text-align-center">
+
+                    <p:commandButton action="#{adminMotoristaBeans.ingresarMotorista()}"
+                                     ajax="false" styleClass="rounded-button ui-button-secondary" value="Guardar" />
+
+                    <p:commandButton  action="#{adminMotoristaBeans.editarMotoristas()}"
+                                      ajax="false" styleClass="rounded-button ui-button-primary" value="Modificar" />
+                </p:panelGrid>
+
+            </div>
+
+        </h:form>
+    </div>
+    <br/><br/><br/>
+    <!-- tabla -->
+    <h:form>
+        <p:dataTable style="width: 80%; margin: 0 auto;box-shadow: 0 25px 25px black; border-radius: 10px"  var="list" value="#{adminMotoristaBeans.motoritasid}">
+            <p:column headerText="Administrador transportista">
+                <h:outputText value="#{list.administradorTransportistaByIdAdministradorTransportista.nombreEmpresa}" />
+            </p:column>
+
+
+
+            <p:column headerText="Id motorista">
+                <h:outputText value="#{list.idMotorista}" />
+            </p:column>
+
+
+            <p:column  headerText="Email">
+                <h:outputText value="#{list.email}" />
+            </p:column>
+
+            <p:column headerText="Estado">
+                <h:outputText value="#{list.estadosGeneralesByEstadoMotorista.estado}" />
+            </p:column>
+
+            <p:column headerText="DUI">
+                <h:outputText value="#{list.dui}" />
+            </p:column>
+
+            <p:column headerText="Telefono">
+                <h:outputText value="#{list.telefono}" />
+            </p:column>
+
+            <p:column headerText="Fecha de Nacimiento">
+                <h:outputText value="#{list.fechaNac}" />
+            </p:column>
+
+            <p:column colspan="2" style="text-align: center" headerText="Operaciones ">
+
+                <p:commandButton style="margin: 3px" action="#{adminMotoristaBeans.seleccionarId(list.idMotorista)}"
+                                 ajax="false" styleClass="rounded-button ui-button-success" value="Obtener Dato" />
+
+                <p:commandButton style="margin: 3px" action="#{adminMotoristaBeans.eliminarMotoristas(list.idMotorista)}" onclick="return confirmarEliminacion();"
+                                 ajax="false" styleClass="rounded-button ui-button-danger" value="Eliminar" />
+
+            </p:column>
+        </p:dataTable>
+    </h:form>
+    <br/><br/><br/>
+
+    <h:outputScript>
+
+        function confirmarEliminacion(){
+            return confirm("¿Está seguro que desea eliminar esta entrada?");
+        }
+    </h:outputScript>
+</h:body>
+
+
+</html>
