@@ -1,23 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   Created by IntelliJ IDEA.
-  User: HP
-  Date: 13/10/2022
-  Time: 15:48
+  User: olive
+  Date: 18/10/2022
+  Time: 10:26 p. m.
 -->
 <!DOCTYPE html
         PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 <h:head>
-    <title>$Title$</title>
+    <title></title>
 </h:head>
-
 <h:body>
-  $END$
+    <div class="card">
+        <h:form>
+            <p:menubar>
+                <p:menuitem value="Getit" outcome="AdministradorGetit"/>
+                <p:submenu label="Clientes" icon="pi pi-fw pi-table">
+                    <p:submenu label="Nuevo" icon="pi pi-fw pi-user-plus">
+                        <p:menuitem icon="pi pi-fw pi-plus" value="Cliente" outcome="nuevoCliente"/>
+                    </p:submenu>
+                    <p:menuitem value="Ver Clientes" icon="pi pi-fw pi-users" outcome="listaClientes"/>
+                </p:submenu>
+                <p:menuitem value="Comidas" icon="pi pi-fw pi-box" outcome="agregarComida"/>
+                <p:submenu label="Acciones rápidas" icon="pi pi-fw pi-arrow-circle-right">
+                    <p:menuitem icon="pi pi-fw pi-comments" value="Quejas"/>
+                    <p:menuitem icon="pi pi-fw pi-question-circle" value="Otras acciones"/>
+                </p:submenu>
+            </p:menubar>
+        </h:form>
+    </div>
 </h:body>
 
 </html>
