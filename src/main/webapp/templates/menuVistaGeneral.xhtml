@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+        <div class="card">
+            <h:form>
+                <p:growl id="messages"/>
+
+                <!--<p:link outcome="administrador" value="Bookmark">
+
+                </p:link>-->
+                <p:menubar>
+                    <!-- Logo de Getit  o pagina principal-->
+                    <p:menuitem value="Getit" outcome="${pageContext.request.contextPath}/getitPage"/>
+                    <!-- Comidas -->
+                    <p:submenu label="Comida" icon="pi pi-fw pi-file">
+                        <p:submenu label="Combos" icon="pi pi-fw pi-plus">
+                            <p:menuitem value="Clase A" icon="pi pi-fw pi-bars"/>
+                            <p:menuitem value="Clase B" icon="pi pi-fw pi-bars"/>
+                        </p:submenu>
+                        <p:submenu label="Items" icon="pi pi-fw pi-plus">
+                            <p:menuitem value="Clase A" icon="pi pi-fw pi-bookmark"/>
+                            <p:menuitem value="Clase B" icon="pi pi-fw pi-bookmark"/>
+                        </p:submenu>
+                    </p:submenu>
+
+                    <!-- Opciones para el usuario para registrarse o iniciar sesion -->
+                    <p:submenu label="Users" icon="pi pi-fw pi-user">
+                        <p:menuitem value="Registrarse" icon="pi pi-fw pi-user-plus" outcome="${pageContext.request.contextPath}/OpcionesUsuarios/registroCliente"/>
+                        <p:menuitem value="Iniciar Sesión" icon="pi pi-fw pi-user-plus" outcome="${pageContext.request.contextPath}/OpcionesUsuarios/iniciarSesion"/>
+                    </p:submenu>
+
+                    <p:divider layout="vertical"/>
+
+                    <f:facet name="options">
+                        <div class="ui-input-icon-left mr-2">
+                            <i class="pi pi-fw pi-search" />
+                            <p:inputText placeholder="Search"/>
+                        </div>
+                    </f:facet>
+                </p:menubar>
+            </h:form>
+        </div>
+
+    </h:body>
+</html>

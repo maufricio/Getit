@@ -11,6 +11,12 @@
         <filter-name>PrimeFaces FileUpload Filter</filter-name>
         <servlet-name>Faces Servlet</servlet-name>
     </filter-mapping>
+
+    <context-param>
+        <param-name>jakarta.faces.DATETIMECONVERTER_DEFAULT_TIMEZONE_IS_SYSTEM_TIMEZONE</param-name>
+        <param-value>true</param-value>
+    </context-param>
+
     <servlet> <!-- Para manejar las interfaces por medio de Jakarta Server Faces -->
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>jakarta.faces.webapp.FacesServlet</servlet-class>
@@ -25,6 +31,10 @@
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
-        <welcome-file>faces/Cliente/Cliente.xhtml</welcome-file>
+        <welcome-file>faces/getitPage.xhtml</welcome-file>
     </welcome-file-list>
+
+    <session-config>
+        <session-timeout>3600</session-timeout>
+    </session-config>
 </web-app>

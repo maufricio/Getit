@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+    <title>Historial de Pedidos</title>
+</h:head>
+
+<h:body>
+    <div class="card">
+        <h:form>
+            <p:breadCrumb>
+                <p:menuitem value="Inicio"/>
+                <p:menuitem value="Compras"/>
+                <p:menuitem value="Pedidos"/>
+                <p:menuitem value="Envios"/>
+                <p:menuitem value="Empresas"/>
+                <p:menuitem value="Visualizaciones del Cliente"/>
+            </p:breadCrumb>
+        </h:form>
+    </div>
+    <h:form>
+        <div class="card">
+            <h2 style="text-decoration-color: aquamarine">Historial de Pedidos</h2>
+            <p:dataTable var="hpagos" value="#{pagosBeans.listaPagos}" allowUnsorting="true" sortMode="single">
+                <p:column sortBy="#{hpagos.idPago}" headerText="Codigo Pago">
+                    <h:outputText value="##{hpagos.idPago}"/>
+                </p:column>
+                <p:column sortBy="#{hpagos.comidasByIdComida.nombreComida}" headerText="Comida">
+
+                    <h:outputText value="#{hpagos.comidasByIdComida.nombreComida}" style="background: aqua; padding: 5px 10px; border-radius: 10px;"/>
+
+                </p:column>
+                <p:column sortBy="#{hpagos.clientesByIdCliente.primerNombre}" headerText="Nombre Cliente">
+
+                    <h:outputText value="#{hpagos.clientesByIdCliente.primerNombre} #{hpagos.clientesByIdCliente.primerApellido}" style="background: aqua; padding: 5px 10px; border-radius: 10px;"/>
+
+                </p:column>
+
+
+
+                <p:column headerText="Total Apagar">
+                    <h:outputText value="#{hpagos.montoPago}">
+                        <f:convertNumber type="currency" currencySymbol="$"/>
+                    </h:outputText>
+                </p:column>
+
+                <p:column sortBy="#{hpagos.tipoPagosByTipoPago.tipoPago}" headerText="Tipo de Pago">
+                    <h:outputText value="#{hpagos.tipoPagosByTipoPago.tipoPago}"/>
+                </p:column>
+
+            </p:dataTable>
+        </div>
+
+    </h:form>
+    <h:form>
+        <div class="card">
+            <h2 style="text-decoration-color: aquamarine">Tiempo de Entrega</h2>
+            <p:dataTable var="entrega" value="#{clientesBean.pedidos}" showGridlines="true">
+                <p:column headerText="Id Pedido">
+                    <h:outputText value="#{entrega.idPedido}" />
+                </p:column>
+
+                <p:column headerText="Fecha de Realizacion">
+                    <h:outputText value="#{entrega.fechaEfectuacion}">
+                        <f:convertDateTime pattern="dd-MM-yyyy" />
+                    </h:outputText>
+                </p:column>
+
+                <p:column headerText="Tiempo Tardio">
+                    <h:outputText value="#{entrega.tiempoTardado}" />
+                </p:column>
+
+            </p:dataTable>
+        </div>
+    </h:form>
+
+    <h:form id="form">
+        <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
+        <div class="card">
+            <h2 style="text-decoration-color: aquamarine">Datos de la Empresa</h2>
+            <p:dataTable id="datos" var="empresa" value="#{clientesBean.pedidos}"
+                         resizableColumns="true" liveResize="true" showGridlines="true">
+                <p:ajax event="colResize" update=":form:msgs" listener="#{clientesBean.onResize}"/>
+
+                <p:column headerText="Id Empresa">
+                    <h:outputText value="#{empresa.unidadesTransporteByIdUnidadTransporte.idUnidadTransporte}" />
+                </p:column>
+
+                <p:column headerText="Dui Motorista">
+                    <h:outputText value="#{empresa.motoristaByIdMotorista.dui}" />
+                </p:column>
+
+                <p:column headerText="Unidad">
+                    <h:outputText value="#{empresa.unidadesTransporteByIdUnidadTransporte.placa}" />
+                </p:column>
+
+            </p:dataTable>
+        </div>
+    </h:form>
+</h:body>
+</html>

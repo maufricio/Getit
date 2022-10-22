@@ -12,6 +12,30 @@
 <h:body>
     <ui:include src="${pageContext.request.contextPath}/templates/MotoristaMenu.xhtml" />
 
+    <p:card style="width: 25em">
+        <f:facet name="header">
+            <img alt="user header" src="../resources/img/timer-image.jpg"/>
+        </f:facet>
+        <f:facet name="title">
+            Contador de tiempo
+        </f:facet>
+        <f:facet name="subtitle">
+            Tiempo contado hacia el destino del pedido
+        </f:facet>
 
+        <p>El máximo de tiempo que se establece es de 10 minutos para llegar al destino que se le
+            ha encargado. Favor seguir las debidas recomendaciones para no ocasionar caos en los lugares que transitará.</p>
+        <h:form>
+                <h:outputText id="poll" value="#{ajaxCounter.counter}" />
+                <p:poll interval="1" listener="#{ajaxCounter.increment()}" update="poll" />
+        </h:form>
+    </p:card>
+
+    <p:card style="width: 25rem; margin-bottom: 2em">
+        <f:facet name="title">
+            Estado de usted, Sr. Motorista:
+        </f:facet>
+        <p>#{motoristaBeans.estado}</p>
+    </p:card>
 </h:body>
 </html>

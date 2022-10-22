@@ -12,9 +12,6 @@ public class PedidosEntity {
     @Column(name = "Id_pedido", nullable = false)
     private int idPedido;
     @Basic
-    @Column(name = "Id_administrador", nullable = false)
-    private int idAdministrador;
-    @Basic
     @Column(name = "direccion_domicilio", nullable = false, length = 50)
     private String direccionDomicilio;
     @Basic
@@ -35,7 +32,7 @@ public class PedidosEntity {
     @JoinColumn(name = "Id_unidadTransporte", referencedColumnName = "Id_unidadTransporte", nullable = false)
     private UnidadesTransporteEntity unidadesTransporteByIdUnidadTransporte;
     @ManyToOne
-    @JoinColumn(name = "Id_administrador", referencedColumnName = "Id_administrador_getit", nullable = false, updatable = false, insertable = false)
+    @JoinColumn(name = "Id_administrador", referencedColumnName = "Id_administrador_getit", nullable = false)
     private AdministradorGetitEntity administradorGetitByIdAdministrador;
     @ManyToOne
     @JoinColumn(name = "estado_pedido", referencedColumnName = "Id_estado", nullable = false)
@@ -47,14 +44,6 @@ public class PedidosEntity {
 
     public void setIdPedido(int idPedido) {
         this.idPedido = idPedido;
-    }
-
-    public int getIdAdministrador() {
-        return idAdministrador;
-    }
-
-    public void setIdAdministrador(int idAdministrador) {
-        this.idAdministrador = idAdministrador;
     }
 
     public String getDireccionDomicilio() {
@@ -89,7 +78,6 @@ public class PedidosEntity {
         PedidosEntity that = (PedidosEntity) o;
 
         if (idPedido != that.idPedido) return false;
-        if (idAdministrador != that.idAdministrador) return false;
         if (direccionDomicilio != null ? !direccionDomicilio.equals(that.direccionDomicilio) : that.direccionDomicilio != null)
             return false;
         if (tiempoTardado != null ? !tiempoTardado.equals(that.tiempoTardado) : that.tiempoTardado != null)
@@ -103,7 +91,6 @@ public class PedidosEntity {
     @Override
     public int hashCode() {
         int result = idPedido;
-        result = 31 * result + idAdministrador;
         result = 31 * result + (direccionDomicilio != null ? direccionDomicilio.hashCode() : 0);
         result = 31 * result + (tiempoTardado != null ? tiempoTardado.hashCode() : 0);
         result = 31 * result + (fechaEfectuacion != null ? fechaEfectuacion.hashCode() : 0);

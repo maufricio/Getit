@@ -1,21 +1,16 @@
 package sv.edu.udb.www.managedbeans;
 
 
-import jakarta.faces.application.FacesMessage;
 import jakarta.faces.bean.ManagedBean;
 import jakarta.faces.bean.RequestScoped;
-import jakarta.faces.context.FacesContext;
-import sv.edu.udb.www.entities.PedidosEntity;
 import sv.edu.udb.www.entities.PedidosEntity;
 import sv.edu.udb.www.models.ClientesModels;
-import sv.edu.udb.www.utils.JpaUtil;
 
 import java.util.List;
-import java.util.Date;
-
 
 @ManagedBean
 @RequestScoped
+//Marlon Realegueño
 public class ClientesBean {
     private PedidosEntity pedido;
 

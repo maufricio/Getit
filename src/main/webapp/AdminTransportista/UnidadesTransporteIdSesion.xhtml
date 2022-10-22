@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: HP
+  Date: 18/10/2022
+  Time: 23:48
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+    <title>Title</title>
+</h:head>
+
+<h:body style="background-color: #e0eef1 ">
+    <!--  formulario-->
+    <div style="border-radius: 10px; padding: 20px; box-shadow: 0 25px 25px black; background-color: white; width: 50%; margin: 0 auto">
+        <h:form>
+            <h2 style="text-align: center; font-family: Impact"><b>Unidades de transporte</b></h2>
+            <div class="ui-fluid">
+                <div class="field grid" style="margin-top: 10px">
+                    <p:outputLabel  styleClass="col-12 md:col-2" value="ID"/>
+                    <div class="col-12 md:col-10">
+                        <p:inputText value="#{unidadesTransporteBeans.unidadesTransporteEntity.idUnidadTransporte}" required="false" requiredMessage="Id requerido" readonly="true"/>
+                    </div>
+                </div>
+                <div class="field grid" style="margin-top: 10px">
+                    <p:outputLabel  styleClass="col-12 md:col-2" value="Placa"/>
+                    <div class="col-12 md:col-10">
+                        <p:inputText value="#{unidadesTransporteBeans.unidadesTransporteEntity.placa}" required="true" requiredMessage="Placa requerida"/>
+                    </div>
+                </div>
+                <div class="field grid" style="margin-top: 10px">
+                    <p:outputLabel  styleClass="col-12 md:col-2" value="Tipo de vehiculo"/>
+                    <div class="col-12 md:col-10">
+                        <p:selectOneMenu value="#{unidadesTransporteBeans.unidadesTransporteEntity.tipoVehiculo}">
+                            <f:selectItem itemLabel="Carro" itemValue="Carro"/>
+                            <f:selectItem itemLabel="Motocicleta" itemValue="Motocicleta"/>
+                            <f:selectItem itemLabel="Camion" itemValue="Camion"/>
+
+                        </p:selectOneMenu>
+                    </div>
+                </div>
+
+                <div class="field grid" style="margin-top: 10px">
+                    <p:outputLabel  styleClass="col-12 md:col-2" value="Peso del vehiculo"/>
+                    <div class="col-12 md:col-10">
+                        <p:selectOneMenu value="#{unidadesTransporteBeans.unidadesTransporteEntity.pesoVehiculo}">
+                            <f:selectItem itemLabel="O.5 o menos Toneladas" itemValue="O.5 o menos Toneladas"/>
+                            <f:selectItem itemLabel="1 Tonelada" itemValue="1 Tonelada"/>
+                            <f:selectItem itemLabel="2 Toneladas" itemValue="2 Toneladas"/>
+                            <f:selectItem itemLabel="3 Toneladas" itemValue="3 Toneladas"/>
+                            <f:selectItem itemLabel="4 Toneladas" itemValue="4 Toneladas"/>
+                            <f:selectItem itemLabel="5 Toneladas" itemValue="5 Toneladas"/>
+                            <f:selectItem itemLabel="6 Toneladas" itemValue="6 Toneladas"/>
+                            <f:selectItem itemLabel="7 Toneladas" itemValue="7 Toneladas"/>
+                            <f:selectItem itemLabel="8 Toneladas" itemValue="8 Toneladas"/>
+                            <f:selectItem itemLabel="9 Toneladas" itemValue="9 Toneladas"/>
+                            <f:selectItem itemLabel="10 Toneladas" itemValue="10 Toneladas"/>
+                        </p:selectOneMenu>
+                    </div>
+                </div>
+                <div class="field grid" style="margin-top: 10px">
+                    <p:outputLabel  styleClass="col-12 md:col-2" value="Id Administrador de transporte"/>
+                    <div class="col-12 md:col-10">
+                        <p:selectOneMenu value="#{unidadesTransporteBeans.idAdminTransportista}">
+                            <f:selectItems value="#{administradorTransportistaBeans.administradorTransportistas}" var="lista"
+                                           itemLabel="#{lista.nombreEmpresa}" itemValue="#{lista.idAdministradorTransportista}"/>
+
+                        </p:selectOneMenu>
+                    </div>
+                </div>
+                <div class="field grid" style="margin-top: 10px">
+                    <p:outputLabel style="text-align: center"  styleClass="col-12 md:col-2" value="Estado de unidad"/>
+                    <div class="col-12 md:col-10">
+                        <p:selectOneMenu value="#{unidadesTransporteBeans.idEstadoUnidad}">
+                            <f:selectItem itemLabel="Disponible" itemValue="1"/>
+                            <f:selectItem itemLabel="Ocupado" itemValue="2"/>
+                        </p:selectOneMenu>
+                    </div>
+                </div>
+                <h:messages />
+
+                <p:panelGrid columns="4" layout="grid" styleClass="showcase-text-align-center">
+
+                    <p:commandButton action="#{unidadesTransporteBeans.ingresarUnidadesTransporte()}"
+                                     ajax="false" styleClass="rounded-button ui-button-secondary" value="Guardar" />
+
+                    <p:commandButton action="#{unidadesTransporteBeans.editarUnidadTransporte()}"
+                                     ajax="false" styleClass="rounded-button ui-button-primary" value="Modificar" />
+                </p:panelGrid>
+
+            </div>
+
+        </h:form>
+    </div>
+    <br/><br/><br/>
+    <!-- tabla -->
+    <h:form>
+        <p:dataTable style="width: 80%; margin: 0 auto;box-shadow: 0 25px 25px black; border-radius: 10px"  var="list" value="#{unidadesTransporteBeans.unidadesTransportesid}" showGridlines="true">
+            <p:column headerText="Id Unidad">
+                <h:outputText value="#{list.idUnidadTransporte}" />
+            </p:column>
+
+            <p:column headerText="Placa">
+                <h:outputText value="#{list.placa}" />
+            </p:column>
+
+            <p:column headerText="Tipo de Vehiculo">
+                <h:outputText value="#{list.tipoVehiculo}" />
+            </p:column>
+
+            <p:column headerText="Peso del Vehiculo">
+                <h:outputText value="#{list.pesoVehiculo}" />
+            </p:column>
+            <p:column headerText=" Administrador Transportista">
+                <h:outputText value="#{list.administradorTransportistaByIdAdministradorTransportista.nombreEmpresa}" />
+            </p:column>
+            <p:column  style="text-align: center" headerText="Estado de la Unidad">
+                <h:outputText value="#{list.estadosGeneralesByEstadoUnidad.estado}" />
+            </p:column>
+            <p:column colspan="2" style="text-align: center" headerText="Operaciones ">
+
+                <p:commandButton style="margin: 3px" action="#{unidadesTransporteBeans.seleccionarId(list.idUnidadTransporte)}"
+                                 ajax="false" styleClass="rounded-button ui-button-success" value="Obtener Dato" />
+
+                <p:commandButton style="margin: 3px" action="#{unidadesTransporteBeans.eliminarUnidadTransporte(list.idUnidadTransporte)}" onclick="return confirmarEliminacion();"
+                                 ajax="false" styleClass="rounded-button ui-button-danger" value="Eliminar" />
+
+            </p:column>
+        </p:dataTable>
+    </h:form>
+    <br/><br/><br/>
+
+    <h:outputScript>
+        function confirmarEliminacion(){
+            return confirm("¿Está seguro que desea eliminar esta entrada?");
+        }
+    </h:outputScript>
+</h:body>
+
+</html>
