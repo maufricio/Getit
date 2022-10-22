@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: olive
+  Date: 20/10/2022
+  Time: 05:51 a. m.
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+    <title>Pedidos</title>
+</h:head>
+
+<h:body>
+    <ui:include src="${pageContext.request.contextPath}/templates/plantillaAdministradorGetit.xhtml"/>
+    <p:panel>
+        <p:dataTable var="pedidos" value="" rows="10"
+                     paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink}
+                         {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15">
+            <p:column headerText="ID Pedido" sortBy="">
+                <p:outputLabel value=""/>
+            </p:column>
+            <p:column headerText="Pago" sortBy="">
+                <p:outputLabel value=""/>
+            </p:column>
+            <p:column headerText="Motorista" sortBy="">
+                <p:outputLabel value=""/>
+            </p:column>
+            <p:column headerText="Estado" sortBy="">
+                <p:outputLabel value=""/>
+            </p:column>
+            <p:column headerText="Fecha de Efectuacion" sortBy="">
+                <p:outputLabel value=""/>
+            </p:column>
+        </p:dataTable>
+    </p:panel>
+
+</h:body>
+
+</html>

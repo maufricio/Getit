@@ -27,6 +27,7 @@ public class ComidasEntity {
     @Basic
     @Column(name = "stock_comida", nullable = false)
     private int stockComida;
+
     @OneToMany(mappedBy = "comidasByIdComida")
     private Collection<PagosEntity> pagosByIdComida;
 

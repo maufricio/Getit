@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: oliver
+  Date: 18/10/2022
+  Time: 11:06 p. m.
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+    <title>Nuevo Cliente</title>
+    <h:outputStylesheet name="style.css"/>
+</h:head>
+<h:body>
+    <ui:include src="${pageContext.request.contextPath}/templates/plantillaAdministradorGetit.xhtml"/>
+    <p:panel>
+       <h:form style="align-content: center;  width: 100%">
+           <div id="container" class="card" style="width: 80%; left: 10.5%; position: absolute">
+               <h3 class="newc">Nuevo Cliente</h3>
+               <p:panelGrid columns="4"
+                            columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+                            layout="grid"
+                            styleClass="ui-panelgrid-blank ui-fluid"
+                            style="border:0px none; background-color:transparent;">
+                   <p:outputLabel for="nombre" value="Nombre"/>
+                   <p:inputText id="nombre" value="#{administradorGetitBeans.cliente.primerNombre}" required="true" requiredMessage="Nombre requerido"/>
+
+                   <p:outputLabel for="apellido" value="Apellido"/>
+                   <p:inputText id="apellido" value="#{administradorGetitBeans.cliente.primerApellido}" required="true" requiredMessage="Apellido requerido"/>
+
+                   <p:outputLabel for="email" value="Correo electrónico"/>
+                   <p:inputText id="email" value="#{administradorGetitBeans.cliente.email}" required="true" requiredMessage="Correo electrónico requerido"/>
+
+                   <p:outputLabel for="fechaN" value="Fecha de Nacimineto:" />
+                   <p:calendar id="fechaN" locale="de" navigator="true" pattern="yyyy-MM-dd"
+                   value="#{administradorGetitBeans.cliente.fechaNac}" required="true" requiredMessage="Fecha Nacimiento requerida"/>
+
+                   <p:outputLabel for="address" value="Domicilio:" />
+                   <p:inputTextarea id="address" rows="3" value="#{administradorGetitBeans.cliente.domicilio}" required="true" requiredMessage="Domicilio requerido"/>
+
+                   <p:row>
+                       <p:column styleClass="ui-grid-col-12">
+                           <p:commandButton action="#{administradorGetitBeans.guardarUsuario()}" ajax="false" value="Guardar" styleClass="rounded-button ui-button-success" style="width:auto"/>
+                           <p:commandButton value="Limpiar" type="reset" styleClass="rounded-button ui-button-warning" style="width: auto; margin-left: 10px"/>
+                       </p:column>
+                   </p:row>
+                   <h:messages/>
+               </p:panelGrid>
+           </div>
+       </h:form>
+    </p:panel>
+</h:body>
+
+</html>

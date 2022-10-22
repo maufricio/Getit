@@ -1,0 +1,23 @@
+@import url('https://rsms.me/inter/inter.css');
+html { font-family: 'Inter', sans-serif; }
+@supports (font-variation-settings: normal) {
+    html { font-family: 'Inter var', sans-serif; }
+}
+
+div#container>h3{
+    font-family: 'Inter',sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 2.25vw;
+    line-height: 44px;
+    text-align: center;
+}
+
+ui-panel, div.ui-state-hover {
+    margin: 10px;
+    width: 200px;
+}
+
+.ui-dashboard-column {
+    width: 220px;
+}

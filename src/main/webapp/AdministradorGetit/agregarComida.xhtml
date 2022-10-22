@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: olive
+  Date: 20/10/2022
+  Time: 07:09 a. m.
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+    <title>Comida</title>
+    <h:outputStylesheet name="style.css"/>
+    <h:outputStylesheet name="alertify.core.css"/>
+    <h:outputStylesheet name="alertify.default.css"/>
+    <h:outputScript name="js/alertify.js"/>
+</h:head>
+
+<h:body>
+    <ui:include src="${pageContext.request.contextPath}/templates/plantillaAdministradorGetit.xhtml"/>
+    <h:form enctype="multipart/form-data">
+    <p:panel>
+
+            <div class="card">
+                <h3>Comida</h3>
+                <p:panelGrid columns="4"
+                             columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+                             layout="grid"
+                             styleClass="ui-panelgrid-blank ui-fluid"
+                             style="border:0px none; background-color:transparent;">
+
+                    <p:outputLabel for="id" value="ID"/>
+                    <p:inputText id="id" value="#{administradorGetitBeans.comida.idComida}"/>
+
+                    <p:outputLabel for="nombre" value="Titulo"/>
+                    <p:inputText id="nombre" value="#{administradorGetitBeans.comida.nombreComida}" />
+
+                    <p:outputLabel for="imagen" value="Imagen"/>
+                    <p:fileUpload mode="simple" skinSimple="true" id="imagen" value="#{administradorGetitBeans.img}" />
+
+                    <p:outputLabel for="tpoferta" value="Tipo de oferta"/>
+                    <p:selectOneMenu id="tpoferta" value="#{administradorGetitBeans.comida.tipoOfertaComida}">
+                        <f:selectItem itemLabel="Combo" itemValue="Combo"/>
+                        <f:selectItem itemLabel="Item" itemValue="Item"/>
+                        <f:selectItem itemLabel="Postre" itemValue="Postre"/>
+                        <f:selectItem itemLabel="Bebida" itemValue="Bebida"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="precio" value="Precio"/>
+                    <p:inputNumber id="precio" value="#{administradorGetitBeans.comida.precioComida}" decimalPlaces="2" minValue="0"/>
+
+                    <p:outputLabel for="stock" value="Stock"/>
+                    <p:inputNumber id="stock" value="#{administradorGetitBeans.comida.stockComida}" minValue="0" decimalPlaces="0"/>
+
+                    <p:row>
+                        <p:column styleClass="ui-grid-col-12">
+                            <p:commandButton action="#{administradorGetitBeans.guardarComida()}" ajax="false" value="Guardar" styleClass="rounded-button ui-button-success" style="width:auto"/>
+                            <p:commandButton type="reset" value="Limpiar" styleClass="rounded-button ui-button-warning" style="width: auto; margin-left: 10px"/>
+                        </p:column>
+                    </p:row>
+                    <h:messages/>
+                </p:panelGrid>
+            </div>
+
+        <p:dataTable var="comida" value="#{administradorGetitBeans.listaComida}" rows="10" paginator="true"
+                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink}
+                         {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15">
+
+            <p:column headerText="ID" sortBy="#{comida.idComida}">
+                <p:outputLabel value="#{comida.idComida}"/>
+            </p:column>
+            <p:column headerText="Titulo" sortBy="#{comida.nombreComida}">
+                <p:outputLabel value="#{comida.nombreComida}"/>
+            </p:column>
+            <p:column headerText="Imagen" sortBy="#{comida.imagenComida}">
+                <p:graphicImage value="#{comida.imagenComida}"/>
+            </p:column>
+            <p:column headerText="Tipo Oferta" sortBy="#{comida.tipoOfertaComida}">
+                <p:outputLabel value="#{comida.tipoOfertaComida}"/>
+            </p:column>
+            <p:column headerText="Precio" sortBy="#{comida.precioComida}">
+                <p:outputLabel value="#{comida.precioComida}"/>
+            </p:column>
+            <p:column headerText="Stock" sortBy="#{comida.stockComida}">
+                <p:outputLabel value="#{comida.stockComida}"/>
+            </p:column>
+            <p:column headerText="Opciones" sortBy="">
+                <p:commandButton title="Editar" action="#{administradorGetitBeans.actualizarComida()}" ajax="false" icon="pi pi-pencil" styleClass="rounded-button ui-button-warning" style="margin-right: 10px; margin-left: 10px">
+                    <f:param name="id" value="#{comida.idComida}"/>
+                </p:commandButton>
+                <p:commandButton title="Eliminar" action="#{administradorGetitBeans.eliminarComida()}" ajax="false" icon="pi pi-times-circle" styleClass="rounded-button ui-button-danger" style="margin-right: 10px" onclick="return confirmarEliminacion()">
+                    <f:param name="id" value="#{comida.idComida}"/>
+                </p:commandButton>
+            </p:column>
+        </p:dataTable>
+    </p:panel>
+        <h:outputScript>
+            <c:if test="#{not empty flash.exito}">
+                alertify.success('#{flash.exito}');
+            </c:if>
+            function confirmarEliminacion(){
+                return confirm("Esta seguro de eliminar esta comida?");
+            }
+        </h:outputScript>
+    </h:form>
+</h:body>
+
+</html>

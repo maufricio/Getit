@@ -14,6 +14,7 @@ public class PagosEntity {
     @Basic
     @Column(name = "monto_pago", nullable = false, precision = 0)
     private double montoPago;
+
     @ManyToOne
     @JoinColumn(name = "Id_comida", referencedColumnName = "Id_comida", nullable = false)
     private ComidasEntity comidasByIdComida;

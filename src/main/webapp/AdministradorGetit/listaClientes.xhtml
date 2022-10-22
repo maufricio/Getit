@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: olive
+  Date: 20/10/2022
+  Time: 04:39 a. m.
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+    <title>Clientes</title>
+    <h:outputStylesheet name="style.css"/>
+    <h:outputStylesheet name="alertify.core.css"/>
+    <h:outputStylesheet name="alertify.default.css"/>
+    <h:outputScript name="js/alertify.js"/>
+</h:head>
+<h:body>
+    <ui:include src="${pageContext.request.contextPath}/templates/plantillaAdministradorGetit.xhtml"/>
+    <h:form>
+    <p:panel>
+        <div id="container" class="card">
+            <h3 class="newc">Actualizar Cliente</h3>
+            <p:panelGrid columns="4"
+                         columnClasses="ui-grid-col-2,ui-grid-col-4,ui-grid-col-2,ui-grid-col-4"
+                         layout="grid"
+                         styleClass="ui-panelgrid-blank ui-fluid"
+                         style="border:0px none; background-color:transparent;">
+                <p:outputLabel for="id" value="ID"/>
+                <p:inputText id="id" value="#{administradorGetitBeans.cliente.idCliente}"/>
+
+                <p:outputLabel for="nombre" value="Nombre"/>
+                <p:inputText id="nombre" value="#{administradorGetitBeans.cliente.primerNombre}" />
+
+                <p:outputLabel for="apellido" value="Apellido"/>
+                <p:inputText id="apellido" value="#{administradorGetitBeans.cliente.primerApellido}" />
+
+                <p:outputLabel for="email" value="Correo electrónico"/>
+                <p:inputText id="email" value="#{administradorGetitBeans.cliente.email}" />
+
+                <p:outputLabel for="fechaN" value="Fecha de Nacimineto:" />
+                <p:calendar id="fechaN" locale="de" navigator="true" pattern="yyyy-MM-dd"
+                            value="#{administradorGetitBeans.cliente.fechaNac}" />
+
+                <p:outputLabel for="address" value="Domicilio:" />
+                <p:inputTextarea id="address" rows="3" value="#{administradorGetitBeans.cliente.domicilio}" />
+
+                <p:row>
+                    <p:column styleClass="ui-grid-col-12">
+                        <p:commandButton  ajax="false" value="Actualizar" action="#{administradorGetitBeans.modificarCliente()}" styleClass="rounded-button ui-button-success" style="width:auto"/>
+                        <p:commandButton type="reset" value="Limpiar" styleClass="rounded-button ui-button-warning" style="width: auto; margin-left: 10px"/>
+                    </p:column>
+                </p:row>
+                <h:messages/>
+            </p:panelGrid>
+        </div>
+
+        <p:dataTable var="clientes" value="#{administradorGetitBeans.listaClientes}" rows="10"
+                     paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink}
+                         {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,15">
+            <p:column headerText="Nombre" sortBy="#{clientes.primerNombre}">
+                <p:outputLabel value="#{clientes.primerNombre}"/>
+            </p:column>
+            <p:column headerText="Apellido" sortBy="#{clientes.primerApellido}">
+                <p:outputLabel value="#{clientes.primerApellido}"/>
+            </p:column>
+            <p:column headerText="Email" sortBy="#{clientes.email}">
+                <p:outputLabel value="#{clientes.email}"/>
+            </p:column>
+            <p:column headerText="Fecha de Nacimiento" sortBy="#{clientes.fechaNac}">
+                <p:outputLabel value="#{clientes.fechaNac}"/>
+            </p:column>
+            <p:column headerText="Acciones">
+                <p:commandButton title="Editar" action="#{administradorGetitBeans.actualizarCliente()}" ajax="false" icon="pi pi-pencil" styleClass="rounded-button ui-button-warning" style="margin-right: 10px; margin-left: 10px">
+                    <f:param name="id" value="#{clientes.idCliente}"/>
+                </p:commandButton>
+                <p:commandButton title="Eliminar" action="#{administradorGetitBeans.eliminarCliente()}" ajax="false" icon="pi pi-times-circle" styleClass="rounded-button ui-button-danger" style="margin-right: 10px" onclick="return confirmarEliminacion()">
+                    <f:param name="id" value="#{clientes.idCliente}"/>
+                </p:commandButton>
+                <p:commandButton title="Pedidos" icon="pi pi-shopping-cart" styleClass="rounded-button ui-button-info" action="#{administradorGetitBeans.redireccionarTablaPedidos()}">
+                    <f:param name="id" value="#{clientes.idCliente}"/>
+                </p:commandButton>
+            </p:column>
+        </p:dataTable>
+    </p:panel>
+<h:outputScript>
+    <c:if test="#{not empty flash.exito}">
+        alertify.success('#{flash.exito}');
+    </c:if>
+    function confirmarEliminacion(){
+        return confirm("Esta seguro de eliminar este cliente?");
+    }
+</h:outputScript>
+    </h:form>
+</h:body>
+
+</html>

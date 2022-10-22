@@ -23,6 +23,8 @@ public class PedidosEntity {
     @Basic
     @Column(name = "fecha_efectuacion", nullable = false)
     private Date fechaEfectuacion;
+
+
     @ManyToOne
     @JoinColumn(name = "Id_pago", referencedColumnName = "Id_pago", nullable = false)
     private PagosEntity pagosByIdPago;
